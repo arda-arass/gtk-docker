@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Update package lists and install dependencies
 RUN apt-get update && apt-get install -y \
+    mm-common \
     build-essential \
     git \
     meson \
@@ -17,18 +18,6 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
     # libglibmm-2.4-dev \
     # libsigc++-2.0-dev \
-    
 
 # Set the working directory
-WORKDIR /app
-RUN mkdir -p /app/src
-ADD src /app/src
-ADD ./Dockerfile /app/Dockerfile
-ADD ./Makefile /app/Makefile
-
-# Make
-RUN make module
-RUN make install
-
-# Run APP
-CMD /app/bin/gtk-app
+WORKDIR /workspace

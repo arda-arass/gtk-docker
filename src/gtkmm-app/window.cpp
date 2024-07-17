@@ -5,7 +5,7 @@ Window::Window()
 : m_button("CLICK")
 {
     set_title("GTKMM-APP");
-    set_default_size(200,200);
+    set_default_size(1000,400);
 
     m_button.signal_clicked().connect(sigc::mem_fun(*this,
               &Window::on_button_clicked));
