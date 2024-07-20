@@ -1,10 +1,15 @@
 PROG = gtk-app
 SRCS = main.c
 
-all: build
+CC ?= gcc
+PKGCONFIG = $(shell which pkg-config)
+CFLAGS = $(shell $(PKGCONFIG) --cflags gtk4)
+LIBS = $(shell $(PKGCONFIG) --libs gtk4)
 
-build:
-	gcc `pkg-config --cflags gtk4` $(SRCS) -o $(PROG) `pkg-config --libs gtk4`
+all: $(PROG)
+
+$(PROG): $(SRCS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 install:
 	cp $(PROG) ../../bin
